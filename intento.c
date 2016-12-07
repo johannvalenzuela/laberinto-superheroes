@@ -30,7 +30,7 @@ A: piso
 B: coorX
 C: coorY
 ***************************/
-char edificio[3][9][9];
+char edificio[3][10][10];
 
 typedef struct posicion{
     int piso;
@@ -48,6 +48,14 @@ Carga el txt que contiene el laberinto y almacena
 los caracteres en la matriz edificio.
 *****************************************/
 void cargar_laberinto(){
+	int i, j, k;
+	for(i=0;i<3;i++){
+		for(j=0; j<10; j++){
+			for(k=0;k<10;k++){
+				edificio[i][j][k] = 0;
+			}
+		}
+	}
     FILE* archivo;
     int piso, coorX, coorY;
     char construccion;
@@ -72,7 +80,7 @@ void mostrar_laberinto(){
         printf("Piso: %d \n",a+1);
         for(b=0;b<10;b++){
             for(c=0;c<10;c++){
-                if(edificio[a][b][c]==NULL){printf("0 ");}
+                if(edificio[a][b][c]==0){printf("0 ");}
                 else{printf("%c ",edificio[a][b][c]);}
             }
             printf("\n");
@@ -82,7 +90,7 @@ void mostrar_laberinto(){
 }
 
 void crear_dupliman(POSICION pos){
-    strcpy(&edificio[pos.piso][pos.coorX][pos.coorY],"M");
+	strcpy(&edificio[pos.piso][pos.coorX][pos.coorY],"M");
 }
 
 void avanza_dupliman(){
